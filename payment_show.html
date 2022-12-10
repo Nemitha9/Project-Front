@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="default">
+
+<head>
+	<title>Edit Payment Details </title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="row page-edit">
+		<div class="row">
+			<h2>
+				Edit Payment Details
+			</h2>
+			<form th:action="@{/reservation/payment/update}" th:object="${payment}">
+				<table class="tbl-form">
+					<tr>
+						<td>Charge Amount</td>
+						<td><input readonly type="text" class="form-control" name="chargeAmount" th:value="${obj.chargeAmount}" /></td>
+					</tr>
+					<tr>
+						<td>Due Amount</td>
+						<td><input type="text" class="form-control" name="dueAmount" th:value="${obj.dueAmount}"  /></td>
+					</tr>
+					<tr>
+						<td>Paid Amount</td>
+						<td><input type="text" class="form-control" name="amountPaid" th:value="${obj.amountPaid}"  /></td>
+					</tr>
+					<tr>
+						<td>Payment Type</td>
+						<td><input type="text" class="form-control" name="paymentType" th:value="${obj.paymentType}"  /></td>
+					</tr>
+				
+				</table>
+
+				<input type="hidden" name="id" th:value="${obj.id}" />
+				<button type="submit" class="btn btn-success btn-submit">Update</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

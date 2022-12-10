@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="default_cust">
+
+<head>
+<title>Edit Requirement Details</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="row page-edit">
+		<div class="row">
+			<h2>Edit Requirement Details</h2>
+			<form th:action="@{/req/update}" th:object="${req}">
+				<table class="tbl-form">
+					<tr>
+						<td>Translation From</td>
+						<td><input type="text" class="form-control" name="transFrom"
+							th:value="${obj.transFrom}" /></td>
+					</tr>
+					<tr>
+						<td>Translation To</td>
+						<td><input type="text" class="form-control" name="transTo"
+							th:value="${obj.transTo}" /></td>
+					</tr>
+					<tr>
+						<td>No Of Pages</td>
+						<td><input type="text" class="form-control" name="pages" th:value="${obj.pages}" onchange="getPrice(this.value)" /></td>
+					</tr>
+					<tr>
+						<td>Total Costs</td>
+						<td><input type="text" id="price"  class="form-control" name="price" th:value="${obj.price}" /></td>
+					</tr>
+					<tr>
+						<td>Description</td>
+						<td><textarea class="form-control" name="description"
+								th:text="${obj.description}"></textarea></td>
+					</tr>
+
+				</table>
+				<input type="hidden" id="costPerPage" th:value="${costPerPage}"  />
+				<input type="hidden" name="id" th:value="${obj.id}" /> 
+				<input type="hidden" name="reqId" th:value="${obj.reqId}" /> 
+				<input type="hidden" name="customerId" th:value="${obj.customerId}" /> 
+				<input type="hidden" name="status" th:value="${obj.status}" /> 
+				<input type="hidden" name="uploadedDoc" th:value="${obj.uploadedDoc}" />
+				<input type="hidden" name="translatedDoc" th:value="${obj.translatedDoc}" />
+				<input type="hidden" name="custConfirmation" th:value="${obj.custConfirmation}" />
+
+				<button type="submit" class="btn btn-success btn-submit">Update</button>
+			</form>
+				<script>
+			function getPrice(pages){
+				var costPerPage = document.getElementById("costPerPage").value;
+				var totalcost = costPerPage * pages;
+				document.getElementById("price").value = totalcost;
+			}
+			</script>
+		</div>
+	</div>
+</body>
+
+</html>

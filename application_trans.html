@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="default">
+
+<head>
+<title>Application List</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="row">
+		<div class="row page-list">
+
+			<h2>Application Details</h2>
+			<div class="table-responsive">
+				<table class="table table-striped page-details">
+					<thead class="table-dark">
+						<tr>
+							<th>Application Id</th>
+							<th>Requirement Id</th>
+							<th>Message</th>
+							<th width="150px">Upload Translated Document</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data : ${datalist}">
+							<td><a th:text="${data.appId}"></a></td>
+							<td th:text="${data.reqId}"></td>
+							<td th:text="${data.message}"></td>
+							<td width="450px">
+								<form th:action="@{/req/upload}" th:object="${req}"
+									method="post" enctype="multipart/form-data">
+									<input type="hidden" name="appId" th:value="${data.appId}" />
+									<table class="tbl-form">
+										<tr>
+											<td><input type="file" class="form-control"
+												name="upload" /></td>
+											<td>
+												<button type="submit" class="btn btn-success btn-submit">Save</button>
+											</td>
+										</tr>
+									</table>
+
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

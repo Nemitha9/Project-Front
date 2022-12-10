@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="default_cust">
+
+<head>
+	<title>Invoice List</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="row">
+		<div class="row page-list">
+
+			<h2>
+				Invoice List 
+				
+			</h2>
+			<div class="table-responsive">
+				<table class="table table-striped page-details">
+					<thead class="table-dark">
+						<tr>
+							<th>ID</th>
+							<th>Customer Id</th>
+							<th>Translator Id</th>
+							<th>Total Pages</th>
+							<th>Amount</th>
+							<th>Payment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data : ${datalist}">
+							<td><a th:text="${data.invId}"></a></td>
+							<td th:text="${data.customerId}"></td>
+							<td th:text="${data.transId}"></td>
+							<td th:text="${data.totalPages}"></td>
+							<td th:text="${data.amount}"></td>
+							<td th:if="${data.status == 'Paid'}" th:text="${data.status}"></td>
+							<td th:if="${data.status != 'Paid'}" ><a th:href="@{'/invoice/payment/' + ${data.invId}}" class="btn btn-primary">Payment</a></td>
+						
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

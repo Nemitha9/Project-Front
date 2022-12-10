@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html  lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="default_cust">
+
+<head>
+	<title>Add Requirement</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="row page-create">
+		<div class="row">
+			<h2>
+				Add New Requirement
+				
+			</h2>
+			<form th:action="@{/req/save}" th:object="${req}" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="costPerPage" th:value="${costPerPage}"  />
+				<table class="tbl-form">
+					<tr>
+						<td>Document</td>
+						<td><input type="file"  class="form-control" name="upload" /></td>
+					</tr>
+					<tr>
+						<td>Translation From</td>
+						<td><input type="text" class="form-control" name="transFrom" /></td>
+					</tr>
+					<tr>
+						<td>Translation To</td>
+						<td><input type="text" class="form-control" name="transTo" /></td>
+					</tr>
+					<tr>
+						<td>No Of Pages</td>
+						<td><input type="text" class="form-control" name="pages" onchange="getPrice(this.value)" /></td>
+					</tr>
+					<tr>
+						<td>Total Cost</td>
+						<td><input type="text" id="price" class="form-control" name="price" /></td>
+					</tr>
+					<tr>
+						<td>Description</td>
+						<td><textarea class="form-control" name="description" ></textarea></td>
+					</tr>
+
+				</table>
+				
+				<button type="submit" class="btn btn-success btn-submit">Save</button>
+			</form>
+			<script>
+			function getPrice(pages){
+				var costPerPage = document.getElementById("costPerPage").value;
+				var totalcost = costPerPage * pages;
+				document.getElementById("price").value = totalcost;
+			}
+			</script>
+			
+		</div>
+	</div>
+</body>
+
+</html>
